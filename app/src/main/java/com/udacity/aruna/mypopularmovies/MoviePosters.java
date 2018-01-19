@@ -11,12 +11,12 @@ public class MoviePosters implements Parcelable {
 
 
 
-    int image; // drawable reference id
-    String posterPath;
-    String mTitle;
-    String overView;
-    String voteAverage;
-    String releaseDate;
+    private final int image; // drawable reference id
+    final String posterPath;
+    private final String mTitle;
+    private final String overView;
+    private final String voteAverage;
+    private final String releaseDate;
 
 
     public MoviePosters(int image,String posterPath, String mTitle,String overView,String voteAverage, String releaseDate){
@@ -69,52 +69,66 @@ public class MoviePosters implements Parcelable {
     };
 
 
-    public int getImage() {
-        return image;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public int getImage() {
+//        return image;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
-    public void setImage(int image) {
-        this.image = image;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setImage(int image) {
+//        this.image = image;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
     public String getPosterPath() {
         return posterPath;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setPosterPath(String posterPath) {
+//        this.posterPath = posterPath;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
     public String getmTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setmTitle(String mTitle) {
+//        this.mTitle = mTitle;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
     public String getOverView() {
         return overView;
     }
 
-    public void setOverView(String overView) {
-        this.overView = overView;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setOverView(String overView) {
+//        this.overView = overView;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
     public String getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(String voteAverage) {
-        this.voteAverage = voteAverage;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setVoteAverage(String voteAverage) {
+//        this.voteAverage = voteAverage;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
+// --Commented out by Inspection START (1/19/2018 4:35 AM):
+//    public void setReleaseDate(String releaseDate) {
+//        this.releaseDate = releaseDate;
+//    }
+// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
 
 }

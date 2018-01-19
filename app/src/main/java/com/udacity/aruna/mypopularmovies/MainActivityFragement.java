@@ -24,8 +24,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 
 /**
  * Created by Aruna
@@ -34,12 +32,7 @@ import static android.content.ContentValues.TAG;
 public class MainActivityFragement extends Fragment {
 
     private ImageFlavourAdaptor imageAdaptor;
-    String[] movieApiJsonData;
-    private MovieApiTask task;
     private GridView gridView;
-    String sortyBy= null;
-    private List<MoviePosters> movieInfoList;
-    String movieDataResponse;
     private ArrayList<MoviePosters> movieList;
 
 
@@ -132,7 +125,7 @@ public class MainActivityFragement extends Fragment {
         switch (item.getItemId()) {
 
             case R.id.action_popular:
-                sortyBy = "popularity.desc";
+                String sortyBy = "popularity.desc";
                 updateSharedPreferences("popularity.desc");
                 loadMovieData(getSortMethod());
                 return true;
@@ -149,13 +142,13 @@ public class MainActivityFragement extends Fragment {
         }
     }
 
-    protected void loadMovieData(String sortBy) {
-        task = new MovieApiTask(this);
+    private void loadMovieData(String sortBy) {
+        MovieApiTask task = new MovieApiTask(this);
         Context context = getActivity();
         if(NetworkUtils.isNetworkAvailable(context)) {
             task.execute(sortBy);
         }else{
-            Toast.makeText(getActivity(), "oops! Network Connection is not available!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "oops! Network Connection is not available! please check the connection and retry later", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -164,7 +157,7 @@ public class MainActivityFragement extends Fragment {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.action_sort), sortMethod);
-        editor.commit();
+        editor.apply();
     }
 
     private String getSortMethod() {
@@ -178,7 +171,7 @@ public class MainActivityFragement extends Fragment {
 
     public class MovieApiTask extends AsyncTask<String, Void, String[]> {
 
-        MainActivityFragement container;
+        final MainActivityFragement container;
 
         public MovieApiTask(MainActivityFragement f) {
             this.container = f;
@@ -194,11 +187,11 @@ public class MainActivityFragement extends Fragment {
 
 
                 URL movieSearchResults = NetworkUtils.buildUrl(sort);
-                movieDataResponse = NetworkUtils
+                String movieDataResponse = NetworkUtils
                         .getResponseFromHttpUrl(movieSearchResults);
 
-                movieApiJsonData = MovieUtilities.getMoviesFromJson(movieDataResponse);
-                movieInfoList = MovieUtilities.getMovieInfo(movieDataResponse);
+                String[] movieApiJsonData = MovieUtilities.getMoviesFromJson(movieDataResponse);
+                List<MoviePosters> movieInfoList = MovieUtilities.getMovieInfo(movieDataResponse);
                 if (getActivity().getFragmentManager() != null) {
                     imageAdaptor = new ImageFlavourAdaptor(getActivity(), movieInfoList);
                 }
@@ -220,7 +213,11 @@ public class MainActivityFragement extends Fragment {
             try {
 
                 gridView.setAdapter(imageAdaptor);
+                if(imageAdaptor!=null)
                 imageAdaptor.notifyDataSetChanged();
+                else
+                    Toast.makeText(getActivity(), "Something went wrong, Please check the movieDBAPI endpoint url.", Toast.LENGTH_SHORT).show();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

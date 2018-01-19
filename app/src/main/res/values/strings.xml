@@ -2,4 +2,11 @@
     <string name="app_name">Popular Movies</string>
     <string name = "action_sort">Sort</string>
     <string name = "averageVote_label">Average Vote</string>
+    <string name ="most_popular">MostPopular</string>
+    <string name ="top_rated">TopRated</string>
+    <string name ="text_view">TextView</string>
+    <string name ="synopsis">Synopsis</string>
+    <string name ="image_descriptoin">ImageGridView</string>
+    <string name ="image_detail">MovieImageDetail</string>
+
 </resources>

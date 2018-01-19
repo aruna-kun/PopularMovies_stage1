@@ -13,10 +13,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 /**
  * Created by Aruna.
  */
@@ -25,7 +21,7 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
 
-    public static URL buildUrl(String sort) throws IOException {
+    public static URL buildUrl(String sort) {
         Uri builtUri = Uri.parse(Constants.MOVIEAPI_BASE_URL).buildUpon()
                 .appendQueryParameter(Constants.PARAM_SORT, sort)
                 .appendQueryParameter(Constants.API_KEY, Constants.KEY_VALUE)
@@ -65,7 +61,7 @@ public class NetworkUtils {
     public static boolean isNetworkAvailable(Context context) {
 
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
-        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+        return (connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null) != null && connectivityManager.getActiveNetworkInfo().isConnected();
 
     }
 
