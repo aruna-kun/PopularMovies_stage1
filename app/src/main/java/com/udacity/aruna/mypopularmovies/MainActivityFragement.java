@@ -15,11 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import com.udacity.aruna.mypopularmovies.utilities.MovieUtilities;
 import com.udacity.aruna.mypopularmovies.utilities.NetworkUtils;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,13 +73,12 @@ public class MainActivityFragement extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         try {
-            // loadMovieData(getSortMethod());
+
             View rootView = inflater.inflate(R.layout.grid_layout, container, false);
             gridView = rootView.findViewById(R.id.flavors_grid);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,14 +126,13 @@ public class MainActivityFragement extends Fragment {
         switch (item.getItemId()) {
 
             case R.id.action_popular:
-                String sortyBy = "popularity.desc";
-                updateSharedPreferences("popularity.desc");
+
+                updateSharedPreferences("popular");
                 loadMovieData(getSortMethod());
                 return true;
 
             case R.id.action_topRated:
-                sortyBy = "average_vote.desc";
-                updateSharedPreferences("vote_average.desc");
+                updateSharedPreferences("top_rated");
                 loadMovieData(getSortMethod());
                 return true;
 
@@ -145,9 +145,9 @@ public class MainActivityFragement extends Fragment {
     private void loadMovieData(String sortBy) {
         MovieApiTask task = new MovieApiTask(this);
         Context context = getActivity();
-        if(NetworkUtils.isNetworkAvailable(context)) {
+        if (NetworkUtils.isNetworkAvailable(context)) {
             task.execute(sortBy);
-        }else{
+        } else {
             Toast.makeText(getActivity(), "oops! Network Connection is not available! please check the connection and retry later", Toast.LENGTH_LONG).show();
         }
     }
@@ -161,12 +161,12 @@ public class MainActivityFragement extends Fragment {
     }
 
     private String getSortMethod() {
-        String s = getString(R.string.action_sort);
+
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        return sharedPref.getString(getString(R.string.action_sort), "popularity.desc");
-    }
+        return sharedPref.getString(getString(R.string.action_sort), "popular");
 
+    }
 
 
     public class MovieApiTask extends AsyncTask<String, Void, String[]> {
@@ -178,27 +178,19 @@ public class MainActivityFragement extends Fragment {
         }
 
 
-
         @Override
         protected String[] doInBackground(String... params) {
             try {
                 String sort = params[0];
-
-
-
                 URL movieSearchResults = NetworkUtils.buildUrl(sort);
                 String movieDataResponse = NetworkUtils
                         .getResponseFromHttpUrl(movieSearchResults);
-
                 String[] movieApiJsonData = MovieUtilities.getMoviesFromJson(movieDataResponse);
                 List<MoviePosters> movieInfoList = MovieUtilities.getMovieInfo(movieDataResponse);
                 if (getActivity().getFragmentManager() != null) {
                     imageAdaptor = new ImageFlavourAdaptor(getActivity(), movieInfoList);
                 }
-
                 movieList = new ArrayList<>(movieInfoList);
-
-
                 return movieApiJsonData;
 
             } catch (Exception e) {
@@ -211,10 +203,9 @@ public class MainActivityFragement extends Fragment {
         @Override
         protected void onPostExecute(String[] result) {
             try {
-
                 gridView.setAdapter(imageAdaptor);
-                if(imageAdaptor!=null)
-                imageAdaptor.notifyDataSetChanged();
+                if (imageAdaptor != null)
+                    imageAdaptor.notifyDataSetChanged();
                 else
                     Toast.makeText(getActivity(), "Something went wrong, Please check the movieDBAPI endpoint url.", Toast.LENGTH_SHORT).show();
 
@@ -222,8 +213,6 @@ public class MainActivityFragement extends Fragment {
                 e.printStackTrace();
             }
         }
-
-
     }
 
 }

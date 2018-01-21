@@ -13,7 +13,7 @@ public class MoviePosters implements Parcelable {
 
     private final int image; // drawable reference id
     final String posterPath;
-    private final String mTitle;
+    private  String mTitle;
     private final String overView;
     private final String voteAverage;
     private final String releaseDate;
@@ -55,7 +55,7 @@ public class MoviePosters implements Parcelable {
 
     }
 
-    public final Parcelable.Creator<MoviePosters> CREATOR = new Parcelable.Creator<MoviePosters>() {
+    public static final  Parcelable.Creator<MoviePosters> CREATOR = new Parcelable.Creator<MoviePosters>() {
         @Override
         public MoviePosters createFromParcel(Parcel parcel) {
             return new MoviePosters(parcel);
@@ -95,11 +95,11 @@ public class MoviePosters implements Parcelable {
         return mTitle;
     }
 
-// --Commented out by Inspection START (1/19/2018 4:35 AM):
-//    public void setmTitle(String mTitle) {
-//        this.mTitle = mTitle;
-//    }
-// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
+
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
+
 
     public String getOverView() {
         return overView;
@@ -125,10 +125,10 @@ public class MoviePosters implements Parcelable {
         return releaseDate;
     }
 
-// --Commented out by Inspection START (1/19/2018 4:35 AM):
+
 //    public void setReleaseDate(String releaseDate) {
 //        this.releaseDate = releaseDate;
 //    }
-// --Commented out by Inspection STOP (1/19/2018 4:35 AM)
+
 
 }

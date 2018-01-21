@@ -31,14 +31,11 @@ class ImageFlavourAdaptor extends ArrayAdapter<MoviePosters> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-
         if (convertView == null) {
 
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.movie_items, parent, false);
         }
-
-
         MoviePosters moviePoster = getItem(position);
         ImageView imageView = convertView.findViewById(R.id.movie_image);
         String posterPath = moviePoster != null ? moviePoster.posterPath : null;

@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+
 import java.net.URL;
 import java.util.Scanner;
+
+
 
 /**
  * Created by Aruna.
@@ -22,12 +25,17 @@ public class NetworkUtils {
 
 
     public static URL buildUrl(String sort) {
-        Uri builtUri = Uri.parse(Constants.MOVIEAPI_BASE_URL).buildUpon()
-                .appendQueryParameter(Constants.PARAM_SORT, sort)
-                .appendQueryParameter(Constants.API_KEY, Constants.KEY_VALUE)
-                .build();
-
         URL url = null;
+        Uri builtUri = Uri.parse("http://api.themoviedb.org/")
+                .buildUpon()
+                .path("3/movie/")
+                .appendPath(sort)
+                .appendQueryParameter(Constants.API_KEY, Constants.KEY_VALUE)
+                .build()
+                ;
+
+
+
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
