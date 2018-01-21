@@ -31,11 +31,7 @@ public class NetworkUtils {
                 .path("3/movie/")
                 .appendPath(sort)
                 .appendQueryParameter(Constants.API_KEY, Constants.KEY_VALUE)
-                .build()
-                ;
-
-
-
+                .build();
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
