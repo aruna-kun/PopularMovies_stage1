@@ -20,7 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.udacity.aruna.mypopularmovies.MovieDetailsActivity">
+        <activity android:name="com.udacity.aruna.mypopularmovies.MovieDetailsActivity"
+            android:parentActivityName="com.udacity.aruna.mypopularmovies.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.udacity.aruna.mypopularmovies.MainActivity" />
         </activity>
     </application>
 

@@ -7,5 +7,5 @@ package com.udacity.aruna.mypopularmovies;
 public class Constants {
 
     public final static String API_KEY = "api_key";
-    public final static String KEY_VALUE = "----generated_api_key----";
+    //public final static String KEY_VALUE = "----generated_api_key----";
 }

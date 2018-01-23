@@ -4,6 +4,8 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.Log;
 
+
+import com.udacity.aruna.mypopularmovies.BuildConfig;
 import com.udacity.aruna.mypopularmovies.Constants;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
+    private static final String API_KEY = BuildConfig.API_KEY;
 
 
     public static URL buildUrl(String sort) {
@@ -30,7 +33,7 @@ public class NetworkUtils {
                 .buildUpon()
                 .path("3/movie/")
                 .appendPath(sort)
-                .appendQueryParameter(Constants.API_KEY, Constants.KEY_VALUE)
+                .appendQueryParameter(Constants.API_KEY, API_KEY)
                 .build();
         try {
             url = new URL(builtUri.toString());
